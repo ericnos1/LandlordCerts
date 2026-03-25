@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CertifyPro — Property Compliance Made Simple</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0B1C2C;
+    --navy-mid: #132638;
+    --navy-light: #1E3A52;
+    --gold: #C9A84C;
+    --gold-light: #E2C97A;
+    --cream: #F7F3EC;
+    --cream-dark: #EDE6D9;
+    --white: #FFFFFF;
+    --text: #0B1C2C;
+    --text-muted: #5A7087;
+    --green: #2D9B6F;
+    --amber: #D4822A;
+    --red: #C0392B;
+    --border: rgba(11,28,44,0.1);
+    --shadow: 0 4px 24px rgba(11,28,44,0.08);
+    --shadow-lg: 0 12px 48px rgba(11,28,44,0.14);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(11,28,44,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 68px;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.45rem; font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none; font-size: 0.875rem; font-weight: 500;
+    letter-spacing: 0.02em; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--gold); color: var(--navy);
+    padding: 0.55rem 1.4rem; border-radius: 4px;
+    font-weight: 600; font-size: 0.875rem; text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+  .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .nav-mobile-btn { display: none; background: none; border: none; cursor: pointer; }
+  .nav-mobile-btn span { display: block; width: 24px; height: 2px; background: white; margin: 5px 0; transition: 0.3s; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--navy);
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    padding: 100px 5% 80px;
+  }
+  .hero-grid-bg {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-glow {
+    position: absolute; top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-glow-2 {
+    position: absolute; bottom: -300px; left: -100px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(30,58,82,0.8) 0%, transparent 70%);
+  }
+  .hero-inner {
+    max-width: 1200px; margin: 0 auto; width: 100%;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+    align-items: center; position: relative; z-index: 2;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.3);
+    color: var(--gold); padding: 0.35rem 0.9rem; border-radius: 100px;
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 1.5rem;
+  }
+  .hero-badge::before { content: '●'; font-size: 0.5rem; }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 4vw, 3.6rem);
+    font-weight: 700; line-height: 1.15;
+    color: var(--white); margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 em { color: var(--gold); font-style: normal; }
+  .hero p {
+    font-size: 1.05rem; line-height: 1.7;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 2.5rem; max-width: 480px;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--gold); color: var(--navy);
+    padding: 0.85rem 2rem; border-radius: 5px;
+    font-weight: 600; font-size: 0.95rem; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    transition: all 0.2s; border: none; cursor: pointer;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.3); }
+  .btn-outline {
+    background: transparent; color: white;
+    padding: 0.85rem 2rem; border-radius: 5px;
+    font-weight: 500; font-size: 0.95rem; text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.25);
+    transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 3rem;
+    padding-top: 2.5rem; border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .hero-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 700; color: var(--gold);
+  }
+  .hero-stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+  /* Booking card */
+  .hero-booking-card {
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255,255,255,0.05);
+    overflow: hidden;
+    animation: floatUp 0.8s ease 0.2s both;
+  }
+  @keyframes floatUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .booking-card-header {
+    background: var(--navy-mid);
+    padding: 1.2rem 1.6rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .booking-card-header h3 {
+    color: white; font-size: 0.95rem; font-weight: 600;
+  }
+  .booking-card-header span {
+    background: var(--gold); color: var(--navy);
+    font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.6rem;
+    border-radius: 100px; text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .booking-card-body { padding: 1.6rem; }
+  .form-group { margin-bottom: 1rem; }
+  .form-group label {
+    display: block; font-size: 0.78rem; font-weight: 600;
+    color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;
+    margin-bottom: 0.4rem;
+  }
+  .form-group select, .form-group input {
+    width: 100%; padding: 0.7rem 1rem;
+    border: 1.5px solid var(--border); border-radius: 6px;
+    font-family: inherit; font-size: 0.9rem; color: var(--text);
+    background: var(--cream); transition: border-color 0.2s;
+    appearance: none;
+  }
+  .form-group select:focus, .form-group input:focus {
+    outline: none; border-color: var(--gold);
+  }
+  .select-wrapper { position: relative; }
+  .select-wrapper::after {
+    content: '▾'; position: absolute; right: 1rem; top: 50%;
+    transform: translateY(-50%); color: var(--text-muted); pointer-events: none;
+    font-size: 0.75rem;
+  }
+  .price-preview {
+    background: var(--cream); border-radius: 8px;
+    padding: 1rem 1.2rem; margin: 1rem 0;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .price-preview-label { font-size: 0.82rem; color: var(--text-muted); }
+  .price-preview-amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; font-weight: 700; color: var(--navy);
+  }
+  .price-preview-amount span { font-size: 0.85rem; font-family: 'DM Sans', sans-serif; color: var(--text-muted); }
+  .book-btn {
+    width: 100%; padding: 0.9rem;
+    background: var(--navy); color: white;
+    border: none; border-radius: 6px; cursor: pointer;
+    font-family: inherit; font-size: 0.95rem; font-weight: 600;
+    transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  }
+  .book-btn:hover { background: var(--navy-light); transform: translateY(-1px); }
+  .booking-trust {
+    display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+    margin-top: 0.8rem; font-size: 0.78rem; color: var(--text-muted);
+  }
+  .booking-trust::before { content: '🔒'; font-size: 0.7rem; }
+
+  /* SERVICES */
+  .services {
+    padding: 100px 5%; background: var(--cream);
+  }
+  .section-eyebrow {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.9rem, 3vw, 2.8rem);
+    font-weight: 700; color: var(--navy);
+    line-height: 1.2; margin-bottom: 1rem;
+  }
+  .section-sub {
+    font-size: 1rem; color: var(--text-muted); max-width: 520px; line-height: 1.7;
+  }
+  .section-header { margin-bottom: 3.5rem; }
+  .services-grid {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;
+  }
+  .service-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 2rem;
+    transition: all 0.25s; cursor: pointer;
+    position: relative; overflow: hidden;
+  }
+  .service-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--gold); transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .service-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-icon {
+    width: 52px; height: 52px; border-radius: 10px;
+    background: var(--cream); display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; margin-bottom: 1.2rem;
+  }
+  .service-card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--navy); }
+  .service-card p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1.2rem; }
+  .service-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 700; color: var(--navy);
+  }
+  .service-price small { font-family: 'DM Sans', sans-serif; font-size: 0.8rem; color: var(--text-muted); font-weight: 400; }
+  .service-tag {
+    display: inline-block; background: rgba(201,168,76,0.12);
+    color: var(--gold); font-size: 0.7rem; font-weight: 700;
+    padding: 0.2rem 0.6rem; border-radius: 4px; text-transform: uppercase;
+    letter-spacing: 0.05em; margin-bottom: 0.8rem;
+  }
+
+  /* HOW IT WORKS */
+  .how {
+    background: var(--navy); padding: 100px 5%;
+  }
+  .how .section-title { color: white; }
+  .how .section-sub { color: rgba(255,255,255,0.55); }
+  .how .section-eyebrow { color: var(--gold); }
+  .steps-row {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+    background: rgba(255,255,255,0.08); border-radius: 16px; overflow: hidden;
+  }
+  .step {
+    background: var(--navy-mid); padding: 2.5rem 2rem;
+    transition: background 0.2s;
+  }
+  .step:hover { background: var(--navy-light); }
+  .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem; font-weight: 700; color: rgba(201,168,76,0.2);
+    line-height: 1; margin-bottom: 1.2rem;
+  }
+  .step h3 { font-size: 1rem; font-weight: 600; color: white; margin-bottom: 0.6rem; }
+  .step p { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+  /* COMPLIANCE TRACKER DEMO */
+  .tracker-section {
+    padding: 100px 5%; background: var(--cream-dark);
+  }
+  .tracker-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+  }
+  .tracker-demo {
+    background: var(--white); border-radius: 16px;
+    box-shadow: var(--shadow-lg); overflow: hidden;
+  }
+  .tracker-demo-header {
+    background: var(--navy); padding: 1.2rem 1.6rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .tracker-demo-header h4 { color: white; font-size: 0.9rem; font-weight: 600; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .dot-red { background: #FF5F57; }
+  .dot-yellow { background: #FEBC2E; }
+  .dot-green { background: #28C840; }
+  .tracker-body { padding: 1.5rem; }
+  .property-row {
+    padding: 1rem; border-radius: 8px; margin-bottom: 0.75rem;
+    border: 1px solid var(--border); transition: box-shadow 0.2s;
+  }
+  .property-row:hover { box-shadow: var(--shadow); }
+  .property-row-top {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 0.75rem;
+  }
+  .property-addr { font-size: 0.88rem; font-weight: 600; color: var(--navy); }
+  .property-type { font-size: 0.75rem; color: var(--text-muted); }
+  .cert-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .cert-badge {
+    display: flex; align-items: center; gap: 0.3rem;
+    padding: 0.25rem 0.6rem; border-radius: 100px;
+    font-size: 0.72rem; font-weight: 600;
+  }
+  .cert-badge.valid { background: rgba(45,155,111,0.1); color: var(--green); }
+  .cert-badge.expiring { background: rgba(212,130,42,0.1); color: var(--amber); }
+  .cert-badge.expired { background: rgba(192,57,43,0.1); color: var(--red); }
+  .cert-badge::before { font-size: 0.6rem; }
+  .cert-badge.valid::before { content: '●'; color: var(--green); }
+  .cert-badge.expiring::before { content: '●'; color: var(--amber); }
+  .cert-badge.expired::before { content: '●'; color: var(--red); }
+
+  /* PRICING */
+  .pricing { padding: 100px 5%; background: var(--cream); }
+  .pricing-grid {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+    align-items: start;
+  }
+  .pricing-card {
+    background: var(--white); border: 1.5px solid var(--border);
+    border-radius: 16px; padding: 2.5rem 2rem; transition: all 0.25s;
+  }
+  .pricing-card:hover { box-shadow: var(--shadow-lg); }
+  .pricing-card.featured {
+    background: var(--navy); border-color: var(--gold);
+    transform: scale(1.03);
+  }
+  .featured-badge {
+    background: var(--gold); color: var(--navy);
+    font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.7rem;
+    border-radius: 100px; text-transform: uppercase; letter-spacing: 0.06em;
+    display: inline-block; margin-bottom: 1.2rem;
+  }
+  .pricing-card h3 {
+    font-size: 1rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.5rem;
+    text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.8rem;
+  }
+  .pricing-card.featured h3 { color: rgba(255,255,255,0.55); }
+  .pricing-amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.6rem; font-weight: 700; color: var(--navy);
+    line-height: 1; margin-bottom: 0.3rem;
+  }
+  .pricing-card.featured .pricing-amount { color: var(--gold); }
+  .pricing-period { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+  .pricing-card.featured .pricing-period { color: rgba(255,255,255,0.45); }
+  .pricing-features { list-style: none; margin-bottom: 2rem; }
+  .pricing-features li {
+    padding: 0.5rem 0; font-size: 0.875rem; color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .pricing-card.featured .pricing-features li { color: rgba(255,255,255,0.65); border-color: rgba(255,255,255,0.08); }
+  .pricing-features li::before { content: '✓'; color: var(--green); font-weight: 700; }
+  .pricing-card.featured .pricing-features li::before { color: var(--gold); }
+  .pricing-btn {
+    width: 100%; padding: 0.85rem; border-radius: 6px;
+    font-family: inherit; font-size: 0.9rem; font-weight: 600;
+    cursor: pointer; transition: all 0.2s; border: 1.5px solid var(--navy);
+    background: transparent; color: var(--navy);
+  }
+  .pricing-card.featured .pricing-btn {
+    background: var(--gold); color: var(--navy); border-color: var(--gold);
+  }
+  .pricing-btn:hover { background: var(--navy); color: white; }
+  .pricing-card.featured .pricing-btn:hover { background: var(--gold-light); }
+
+  /* TESTIMONIALS */
+  .testimonials { background: var(--navy); padding: 100px 5%; }
+  .testimonials .section-title { color: white; }
+  .testimonials .section-eyebrow { color: var(--gold); }
+  .testimonials-grid {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+  }
+  .testimonial-card {
+    background: var(--navy-mid);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px; padding: 2rem;
+    transition: border-color 0.2s;
+  }
+  .testimonial-card:hover { border-color: rgba(201,168,76,0.25); }
+  .stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 1rem; letter-spacing: 2px; }
+  .testimonial-card blockquote {
+    font-size: 0.9rem; line-height: 1.7; color: rgba(255,255,255,0.7);
+    font-style: italic; margin-bottom: 1.5rem;
+  }
+  .testimonial-author { display: flex; align-items: center; gap: 0.8rem; }
+  .author-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--gold); display: flex; align-items: center; justify-content: center;
+    font-weight: 700; color: var(--navy); font-size: 0.85rem;
+  }
+  .author-name { font-size: 0.875rem; font-weight: 600; color: white; }
+  .author-role { font-size: 0.775rem; color: rgba(255,255,255,0.45); }
+
+  /* TRUST STRIP */
+  .trust-strip {
+    background: var(--cream-dark); padding: 2.5rem 5%;
+    display: flex; align-items: center; justify-content: center; gap: 3rem;
+    flex-wrap: wrap; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  }
+  .trust-item { display: flex; align-items: center; gap: 0.6rem; }
+  .trust-item span { font-size: 0.85rem; font-weight: 600; color: var(--text-muted); }
+  .trust-icon { font-size: 1.1rem; }
+
+  /* CTA */
+  .cta-section {
+    background: var(--gold); padding: 90px 5%;
+    text-align: center;
+  }
+  .cta-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700;
+    color: var(--navy); margin-bottom: 1rem;
+  }
+  .cta-section p { color: rgba(11,28,44,0.65); font-size: 1rem; margin-bottom: 2.5rem; }
+  .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .cta-btn-dark {
+    background: var(--navy); color: white;
+    padding: 0.9rem 2.2rem; border-radius: 5px;
+    font-weight: 600; font-size: 0.95rem; text-decoration: none;
+    transition: all 0.2s;
+  }
+  .cta-btn-dark:hover { background: var(--navy-light); transform: translateY(-2px); }
+  .cta-btn-white {
+    background: white; color: var(--navy);
+    padding: 0.9rem 2.2rem; border-radius: 5px;
+    font-weight: 600; font-size: 0.95rem; text-decoration: none;
+    transition: all 0.2s;
+  }
+  .cta-btn-white:hover { transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer {
+    background: #080F18; padding: 60px 5% 30px;
+  }
+  .footer-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
+    margin-bottom: 3rem;
+  }
+  .footer-brand-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 700; color: white; margin-bottom: 0.8rem;
+  }
+  .footer-brand-logo span { color: var(--gold); }
+  .footer-desc { font-size: 0.85rem; color: rgba(255,255,255,0.4); line-height: 1.7; max-width: 260px; }
+  .footer-col h4 { color: white; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 0.5rem; }
+  .footer-col ul li a { color: rgba(255,255,255,0.45); font-size: 0.85rem; text-decoration: none; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--gold); }
+  .footer-bottom {
+    max-width: 1200px; margin: 0 auto;
+    padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: gap;
+  }
+  .footer-bottom p { font-size: 0.8rem; color: rgba(255,255,255,0.3); }
+  .footer-badges { display: flex; gap: 0.5rem; }
+  .footer-badge {
+    background: rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.4); font-size: 0.7rem;
+    padding: 0.2rem 0.6rem; border-radius: 4px;
+  }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+    align-items: center; justify-content: center; padding: 1rem;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: white; border-radius: 16px;
+    width: 100%; max-width: 500px; overflow: hidden;
+    animation: modalIn 0.25s ease;
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(0.95) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .modal-header {
+    background: var(--navy); padding: 1.4rem 1.6rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .modal-header h3 { color: white; font-size: 1rem; font-weight: 600; }
+  .modal-close {
+    background: none; border: none; color: rgba(255,255,255,0.5);
+    cursor: pointer; font-size: 1.3rem; line-height: 1; transition: color 0.2s;
+  }
+  .modal-close:hover { color: white; }
+  .modal-body { padding: 1.8rem; }
+  .success-screen { text-align: center; padding: 2rem; }
+  .success-icon { font-size: 3.5rem; margin-bottom: 1rem; }
+  .success-screen h3 { font-size: 1.2rem; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; }
+  .success-screen p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .steps-row { grid-template-columns: 1fr 1fr; }
+    .tracker-inner { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .pricing-card.featured { transform: none; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 680px) {
+    .nav-links, .nav-cta { display: none; }
+    .nav-mobile-btn { display: block; }
+    .steps-row { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; }
+    .trust-strip { gap: 1.5rem; }
+  }
+
+  /* ANIMATIONS */
+  .fade-in {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: none; }
+
+  /* SCROLL */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--cream); }
+  ::-webkit-scrollbar-thumb { background: var(--navy-light); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Certify<span>Pro</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#how">How it Works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#compliance">Dashboard</a></li>
+    <li><a href="#">Blog</a></li>
+  </ul>
+  <a class="nav-cta" href="#book">Book Now</a>
+  <button class="nav-mobile-btn" onclick="this.classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">UK Property Compliance Platform</div>
+      <h1>All Your Property<br>Certifications <em>In One Place</em></h1>
+      <p>Book Gas Safety, EICR, EPC and more in under 60 seconds. Track compliance across your entire portfolio. Never miss a renewal deadline again.</p>
+      <div class="hero-actions">
+        <a href="#book" class="btn-primary" onclick="openModal()">Book a Certificate ↗</a>
+        <a href="#how" class="btn-outline">How it works</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">4,200+</div>
+          <div class="hero-stat-label">Certificates issued</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">98%</div>
+          <div class="hero-stat-label">Customer satisfaction</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">48hr</div>
+          <div class="hero-stat-label">Average turnaround</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-booking-card" id="book">
+      <div class="booking-card-header">
+        <h3>Book a Certification</h3>
+        <span>Instant Quote</span>
+      </div>
+      <div class="booking-card-body">
+        <div class="form-group">
+          <label>Service Type</label>
+          <div class="select-wrapper">
+            <select id="serviceSelect" onchange="updatePrice()">
+              <option value="">Select a service...</option>
+              <option value="69">EICR — Electrical Safety Report</option>
+              <option value="49">Gas Safety Certificate (CP12)</option>
+              <option value="79">EPC — Energy Performance Certificate</option>
+              <option value="149">Fire Safety + PAT Testing</option>
+              <option value="99">Legionella Risk Assessment</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Property Type</label>
+          <div class="select-wrapper">
+            <select id="propSelect" onchange="updatePrice()">
+              <option value="1">Studio / 1 Bedroom</option>
+              <option value="1.2">2 Bedrooms</option>
+              <option value="1.4">3 Bedrooms</option>
+              <option value="1.6">4 Bedrooms</option>
+              <option value="2">5+ Bedrooms / HMO</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Postcode</label>
+          <input type="text" placeholder="e.g. SW1A 1AA" id="postcodeInput">
+        </div>
+        <div class="price-preview">
+          <div>
+            <div class="price-preview-label">Estimated Price</div>
+            <div style="font-size:0.75rem;color:var(--text-muted);margin-top:2px;">incl. VAT · fixed price</div>
+          </div>
+          <div class="price-preview-amount" id="priceDisplay">— <span>Select service</span></div>
+        </div>
+        <button class="book-btn" onclick="openModal()">
+          Book Now & Pay Securely →
+        </button>
+        <div class="booking-trust">Secure payment via Stripe · Instant confirmation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="trust-item"><span class="trust-icon">🏅</span><span>Gas Safe Registered Engineers</span></div>
+  <div class="trust-item"><span class="trust-icon">⚡</span><span>NICEIC Approved</span></div>
+  <div class="trust-item"><span class="trust-icon">🛡️</span><span>Fully Insured Inspectors</span></div>
+  <div class="trust-item"><span class="trust-icon">📜</span><span>GDPR Compliant</span></div>
+  <div class="trust-item"><span class="trust-icon">⭐</span><span>4.9/5 on Trustpilot</span></div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="section-header fade-in">
+      <div class="section-eyebrow">Our Services</div>
+      <h2 class="section-title">Every Certificate<br>Your Property Needs</h2>
+      <p class="section-sub">Legally compliant certifications carried out by qualified engineers, delivered to your dashboard within 48 hours.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card fade-in">
+        <div class="service-icon">⚡</div>
+        <div class="service-tag">Required by Law</div>
+        <h3>EICR — Electrical Inspection</h3>
+        <p>Mandatory for all rental properties every 5 years. Covers wiring, consumer units, sockets and all fixed electrical installations.</p>
+        <div class="service-price">from £69 <small>per report</small></div>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">🔥</div>
+        <div class="service-tag">Annual Requirement</div>
+        <h3>Gas Safety Certificate (CP12)</h3>
+        <p>Annual legally-required check for all gas appliances, pipework and flues by a Gas Safe registered engineer.</p>
+        <div class="service-price">from £49 <small>per year</small></div>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">🏠</div>
+        <div class="service-tag">Lettings Requirement</div>
+        <h3>EPC — Energy Performance</h3>
+        <p>Required before marketing a property. Valid for 10 years. Essential for demonstrating energy efficiency ratings A–G.</p>
+        <div class="service-price">from £79 <small>per certificate</small></div>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">🧯</div>
+        <div class="service-tag">HMO & Commercial</div>
+        <h3>Fire Safety + PAT Testing</h3>
+        <p>Portable Appliance Testing and comprehensive fire risk assessments for HMOs, commercial and multi-occupancy properties.</p>
+        <div class="service-price">from £149 <small>per assessment</small></div>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">💧</div>
+        <div class="service-tag">Risk Assessment</div>
+        <h3>Legionella Risk Assessment</h3>
+        <p>Legally required for all landlords. Assessment of water systems to ensure compliance with HSE L8 guidelines.</p>
+        <div class="service-price">from £99 <small>per property</small></div>
+      </div>
+      <div class="service-card fade-in" style="background:var(--navy);border-color:var(--gold);">
+        <div class="service-icon" style="background:rgba(201,168,76,0.15);">📦</div>
+        <div class="service-tag" style="background:rgba(201,168,76,0.2);color:var(--gold);">Best Value</div>
+        <h3 style="color:white;">Compliance Bundle</h3>
+        <p style="color:rgba(255,255,255,0.55);">EICR + Gas Safety + EPC bundled together. Save up to 20% on individual prices. Ideal for new or renewing landlords.</p>
+        <div class="service-price" style="color:var(--gold);">from £159 <small style="color:rgba(255,255,255,0.4);">bundle price</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="section-header fade-in" style="margin-bottom:3.5rem">
+      <div class="section-eyebrow">The Process</div>
+      <h2 class="section-title">Booked, Inspected &amp;<br>Certified in Days</h2>
+      <p class="section-sub" style="color:rgba(255,255,255,0.5)">No phone calls, no chasing engineers. Everything managed online from booking to certificate delivery.</p>
+    </div>
+    <div class="steps-row fade-in">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Enter Your Property</h3>
+        <p>Enter your postcode, select your property type and the certification you need. Get an instant fixed price.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>Choose a Time Slot</h3>
+        <p>Pick a date and time that suits you and your tenant. We coordinate access — you don't have to.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Pay Securely Online</h3>
+        <p>Pay via card or invoice. No hidden fees. Your booking is instantly confirmed by email and SMS.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h3>Certificate to Dashboard</h3>
+        <p>Your certified engineer completes the inspection. Certificate uploads to your dashboard within 48 hours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPLIANCE TRACKER DEMO -->
+<section class="tracker-section" id="compliance">
+  <div class="tracker-inner">
+    <div class="fade-in">
+      <div class="section-eyebrow">Compliance Dashboard</div>
+      <h2 class="section-title">Never Miss a<br>Renewal Deadline</h2>
+      <p class="section-sub" style="margin-bottom:2rem">Your personal compliance hub. See the status of every certificate across your entire portfolio at a glance — with automated renewal alerts sent 90, 30 and 7 days before expiry.</p>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:0.75rem">
+        <li style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:var(--text-muted)">
+          <span style="color:var(--green);font-size:1.1rem">✓</span> Traffic light status across all properties
+        </li>
+        <li style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:var(--text-muted)">
+          <span style="color:var(--green);font-size:1.1rem">✓</span> PDF certificate storage & downloads
+        </li>
+        <li style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:var(--text-muted)">
+          <span style="color:var(--green);font-size:1.1rem">✓</span> Email + SMS renewal reminders
+        </li>
+        <li style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:var(--text-muted)">
+          <span style="color:var(--green);font-size:1.1rem">✓</span> One-click rebook from your dashboard
+        </li>
+      </ul>
+      <a href="#" onclick="openModal()" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:2rem;background:var(--navy);color:white;padding:0.85rem 1.8rem;border-radius:6px;text-decoration:none;font-weight:600;font-size:0.9rem;transition:all 0.2s" onmouseover="this.style.background='#1E3A52'" onmouseout="this.style.background='var(--navy)'">
+        Create Free Account →
+      </a>
+    </div>
+    <div class="tracker-demo fade-in">
+      <div class="tracker-demo-header">
+        <div style="display:flex;gap:6px;margin-right:12px">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+        </div>
+        <h4>My Properties — Compliance Overview</h4>
+      </div>
+      <div class="tracker-body">
+        <div style="display:flex;gap:0.5rem;margin-bottom:1rem">
+          <div style="flex:1;background:rgba(45,155,111,0.08);border:1px solid rgba(45,155,111,0.2);border-radius:6px;padding:0.6rem;text-align:center">
+            <div style="font-size:1.3rem;font-weight:700;color:var(--green)">4</div>
+            <div style="font-size:0.7rem;color:var(--text-muted)">Compliant</div>
+          </div>
+          <div style="flex:1;background:rgba(212,130,42,0.08);border:1px solid rgba(212,130,42,0.2);border-radius:6px;padding:0.6rem;text-align:center">
+            <div style="font-size:1.3rem;font-weight:700;color:var(--amber)">2</div>
+            <div style="font-size:0.7rem;color:var(--text-muted)">Expiring Soon</div>
+          </div>
+          <div style="flex:1;background:rgba(192,57,43,0.08);border:1px solid rgba(192,57,43,0.2);border-radius:6px;padding:0.6rem;text-align:center">
+            <div style="font-size:1.3rem;font-weight:700;color:var(--red)">1</div>
+            <div style="font-size:0.7rem;color:var(--text-muted)">Action Needed</div>
+          </div>
+        </div>
+
+        <div class="property-row">
+          <div class="property-row-top">
+            <div>
+              <div class="property-addr">14 Oakfield Rd, Manchester</div>
+              <div class="property-type">2 Bed · Private Let</div>
+            </div>
+            <span style="font-size:0.7rem;color:var(--text-muted)">Last checked today</span>
+          </div>
+          <div class="cert-badges">
+            <div class="cert-badge valid">EICR · Valid until Oct 2027</div>
+            <div class="cert-badge valid">Gas · Valid until Mar 2025</div>
+            <div class="cert-badge valid">EPC · B Rating</div>
+          </div>
+        </div>
+
+        <div class="property-row">
+          <div class="property-row-top">
+            <div>
+              <div class="property-addr">7 Station Lane, Leeds</div>
+              <div class="property-type">3 Bed · HMO</div>
+            </div>
+            <span style="font-size:0.7rem;color:var(--amber);font-weight:600">⚠ Action soon</span>
+          </div>
+          <div class="cert-badges">
+            <div class="cert-badge expiring">EICR · Expires in 28 days</div>
+            <div class="cert-badge valid">Gas · Valid</div>
+            <div class="cert-badge expiring">EPC · Expires in 45 days</div>
+          </div>
+        </div>
+
+        <div class="property-row">
+          <div class="property-row-top">
+            <div>
+              <div class="property-addr">22 Birch Close, Birmingham</div>
+              <div class="property-type">1 Bed · Private Let</div>
+            </div>
+            <span style="font-size:0.7rem;color:var(--red);font-weight:600">● Overdue</span>
+          </div>
+          <div class="cert-badges">
+            <div class="cert-badge valid">EICR · Valid</div>
+            <div class="cert-badge expired">Gas · EXPIRED</div>
+            <div class="cert-badge valid">EPC · Valid</div>
+          </div>
+        </div>
+
+        <button onclick="openModal()" style="width:100%;margin-top:1rem;padding:0.75rem;background:var(--navy);color:white;border:none;border-radius:6px;cursor:pointer;font-family:inherit;font-size:0.875rem;font-weight:600;transition:background 0.2s" onmouseover="this.style.background='#1E3A52'" onmouseout="this.style.background='var(--navy)'">
+          Rebook Expired Certificates →
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="section-header fade-in" style="text-align:center">
+      <div class="section-eyebrow">Pricing Plans</div>
+      <h2 class="section-title">Simple, Transparent Pricing</h2>
+      <p class="section-sub" style="margin:0 auto">Pay per certificate or save with a monthly compliance plan.</p>
+    </div>
+    <div class="pricing-grid fade-in">
+      <div class="pricing-card">
+        <h3>Pay As You Go</h3>
+        <div class="pricing-amount">£0</div>
+        <div class="pricing-period">No monthly fee · Per-certificate pricing</div>
+        <ul class="pricing-features">
+          <li>Book individual certificates</li>
+          <li>Access to all service types</li>
+          <li>Certificate stored in dashboard</li>
+          <li>Email confirmation</li>
+          <li>Basic renewal reminders</li>
+        </ul>
+        <button class="pricing-btn" onclick="openModal()">Get Started</button>
+      </div>
+      <div class="pricing-card featured">
+        <div class="featured-badge">Most Popular</div>
+        <h3>Landlord Pro</h3>
+        <div class="pricing-amount">£19</div>
+        <div class="pricing-period">per month · billed annually</div>
+        <ul class="pricing-features">
+          <li>Up to 10 properties</li>
+          <li>10% discount on all certs</li>
+          <li>Full compliance dashboard</li>
+          <li>SMS + email alerts (90/30/7 days)</li>
+          <li>Priority booking slots</li>
+          <li>Document storage & downloads</li>
+        </ul>
+        <button class="pricing-btn" onclick="openModal()">Start Free Trial</button>
+      </div>
+      <div class="pricing-card">
+        <h3>Agent / Portfolio</h3>
+        <div class="pricing-amount">£49</div>
+        <div class="pricing-period">per month · unlimited properties</div>
+        <ul class="pricing-features">
+          <li>Unlimited properties</li>
+          <li>15% discount on all certs</li>
+          <li>Bulk booking tools</li>
+          <li>White-label client portal</li>
+          <li>Dedicated account manager</li>
+          <li>Invoice payment option</li>
+        </ul>
+        <button class="pricing-btn" onclick="openModal()">Contact Sales</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="section-header fade-in" style="text-align:center;margin-bottom:3rem">
+      <div class="section-eyebrow">Testimonials</div>
+      <h2 class="section-title">Trusted by Landlords<br>Across the UK</h2>
+    </div>
+    <div class="testimonials-grid fade-in">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Booked my EICR in under 2 minutes. Certificate was in my dashboard the next day. No chasing, no hassle. This is exactly what landlords need."</blockquote>
+        <div class="testimonial-author">
+          <div class="author-avatar">JT</div>
+          <div>
+            <div class="author-name">James Thompson</div>
+            <div class="author-role">Private Landlord · 6 properties · Manchester</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"As a letting agent managing 80+ properties, the compliance dashboard has completely transformed how we track renewals. We've eliminated all overdue certificates."</blockquote>
+        <div class="testimonial-author">
+          <div class="author-avatar">SR</div>
+          <div>
+            <div class="author-name">Sarah Rahman</div>
+            <div class="author-role">Lettings Manager · Prestige Lettings, Leeds</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"The automated reminders saved me from a very expensive oversight. My gas cert was expiring and I had no idea. Now I'm always ahead of the game."</blockquote>
+        <div class="testimonial-author">
+          <div class="author-avatar">MP</div>
+          <div>
+            <div class="author-name">Michael Patel</div>
+            <div class="author-role">HMO Landlord · 12 units · Birmingham</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Ready to Simplify Your Compliance?</h2>
+  <p>Join over 1,200 landlords and agents who've switched to CertifyPro.</p>
+  <div class="cta-btns">
+    <a href="#" class="cta-btn-dark" onclick="openModal()">Book Your First Certificate</a>
+    <a href="#" class="cta-btn-white">View All Services</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand-logo">Certify<span>Pro</span></div>
+      <p class="footer-desc">The UK's most trusted property certification platform. All compliance, one place.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#">EICR Reports</a></li>
+        <li><a href="#">Gas Safety (CP12)</a></li>
+        <li><a href="#">EPC Certificates</a></li>
+        <li><a href="#">Fire Safety</a></li>
+        <li><a href="#">Legionella</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">How it Works</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Cookie Policy</a></li>
+        <li><a href="#">GDPR</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 CertifyPro Ltd. All rights reserved. Registered in England & Wales.</p>
+    <div class="footer-badges">
+      <span class="footer-badge">Gas Safe</span>
+      <span class="footer-badge">NICEIC</span>
+      <span class="footer-badge">GDPR</span>
+      <span class="footer-badge">SSL Secure</span>
+    </div>
+  </div>
+</footer>
+
+<!-- BOOKING MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Complete Your Booking</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" placeholder="John Smith">
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="john@example.com">
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" placeholder="07700 000000">
+      </div>
+      <div class="form-group">
+        <label>Property Address</label>
+        <input type="text" placeholder="Full address incl. postcode">
+      </div>
+      <div class="form-group">
+        <label>Preferred Date</label>
+        <input type="date">
+      </div>
+      <div style="background:var(--cream);border-radius:8px;padding:1rem;margin:1rem 0;font-size:0.82rem;color:var(--text-muted);line-height:1.6">
+        🔒 Your payment will be processed securely via Stripe. You'll receive instant confirmation by email and SMS.
+      </div>
+      <button class="book-btn" onclick="submitBooking()">
+        Confirm Booking & Pay →
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const prices = {
+    "69": 69, "49": 49, "79": 79, "149": 149, "99": 99
+  };
+
+  function updatePrice() {
+    const svc = document.getElementById('serviceSelect').value;
+    const prop = parseFloat(document.getElementById('propSelect').value);
+    const display = document.getElementById('priceDisplay');
+    if (!svc) {
+      display.innerHTML = '— <span>Select service</span>';
+      return;
+    }
+    const base = prices[svc];
+    const total = Math.round(base * prop);
+    display.innerHTML = `£${total} <span>inc. VAT</span>`;
+  }
+
+  function openModal() {
+    document.getElementById('modalOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+    document.getElementById('modalBody').innerHTML = getModalForm();
+  }
+
+  function closeModalOutside(e) {
+    if (e.target === document.getElementById('modalOverlay')) closeModal();
+  }
+
+  function submitBooking() {
+    document.getElementById('modalBody').innerHTML = `
+      <div class="success-screen">
+        <div class="success-icon">✅</div>
+        <h3>Booking Confirmed!</h3>
+        <p>Thank you! We've received your booking and a confirmation has been sent to your email and phone. Our team will be in touch within 2 hours to confirm your appointment slot.</p>
+        <p style="margin-top:1rem;font-size:0.8rem;color:var(--text-muted)">You can view and manage your booking in your dashboard.</p>
+        <button onclick="closeModal()" style="margin-top:1.5rem;padding:0.75rem 2rem;background:var(--navy);color:white;border:none;border-radius:6px;font-family:inherit;font-weight:600;cursor:pointer;font-size:0.9rem">
+          Done
+        </button>
+      </div>
+    `;
+  }
+
+  function getModalForm() {
+    return `
+      <div class="form-group"><label>Full Name</label><input type="text" placeholder="John Smith"></div>
+      <div class="form-group"><label>Email Address</label><input type="email" placeholder="john@example.com"></div>
+      <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="07700 000000"></div>
+      <div class="form-group"><label>Property Address</label><input type="text" placeholder="Full address incl. postcode"></div>
+      <div class="form-group"><label>Preferred Date</label><input type="date"></div>
+      <div style="background:var(--cream);border-radius:8px;padding:1rem;margin:1rem 0;font-size:0.82rem;color:var(--text-muted);line-height:1.6">
+        🔒 Your payment will be processed securely via Stripe. You'll receive instant confirmation by email and SMS.
+      </div>
+      <button class="book-btn" onclick="submitBooking()">Confirm Booking & Pay →</button>
+    `;
+  }
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) { el.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Stagger service cards
+  document.querySelectorAll('.service-card').forEach((card, i) => {
+    card.style.transitionDelay = `${i * 80}ms`;
+  });
+</script>
+</body>
+</html>
